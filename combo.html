@@ -1,0 +1,56 @@
+﻿<html>
+<head>
+<script src="./jquery-3.0.0.min.js"></script>
+</head>
+<body>
+<!--img src="../images/videoUpload.png" id="uploadVideo" /-->
+<button type="button" id="fi">Select a file</button>
+<input type="text" id="finfo" value="nothing" />
+<input type="file" style="display:none" id="fileInput" />
+
+<script type="text/javascript">
+function getFullPath(obj)  
+        {  
+            if(obj)  
+            {  
+                if (window.navigator.userAgent.indexOf("MSIE")>=1)    //ie  
+                {  
+                    obj.select();
+                    return document.selection.createRange().text;  
+                }  
+                else if(window.navigator.userAgent.indexOf("Firefox")>=1)             //firefox  
+                {  
+                    if(obj.files)
+                    {  
+                        return obj.files.item(0).getAsDataURL();  
+                    }  
+                    return obj.value;  
+                }  
+                return obj.value;  
+            }  
+        }  
+
+$(document).ready(function(){
+	$("#fi").click(function(){
+		var fileInput = $("#fileInput");//隐藏的file文本ID
+		fileInput.click();//加一个触发事件
+	});
+	
+	$("#fileInput").on('change',function(){
+		var fileObjs = this.files;
+		var fileObj = fileObjs[0];
+		var fname = fileObj.name;
+		var blob = window.URL.createObjectURL(fileObj);
+		var reader = new FileReader();
+		reader.addEventListener("load", function () {
+			alert(reader.result);
+		}, false);
+		reader.readAsArrayBuffer(fileObj);
+		//alert(furl);
+		$("#finfo").val(fname);
+	});
+});
+</script>
+
+</body>
+</html> 
