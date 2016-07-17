@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://www.open-open.com/code/view/1434098768536 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>CryptoJS AES加密、解密练习demo - OPEN代码分享</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="JavaScript,">
+        
+		<link href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/bootstrap.min.css" rel="stylesheet">
+		<link href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/font-awesome.min.css" rel="stylesheet">
+		<link href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/styles.css" rel="stylesheet">
+
+        <link href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/style.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/jquery-ui.css">
+		<style>
+			.global-tags{background: #333;color: #ababab;height: 30px;line-height: 30px;width: 100%;overflow: hidden;}
+			.global-tags .container{position: relative;}
+			.global-tags ul{margin: 0}
+			.global-tags a{color:#ababab;padding: 5px; }
+			.global-tags a:hover{color:#e0e0e0; }
+			.global-tags li { display: inline-block; padding: 0; }
+			.global-tags  .more { background-color: #333; height: 30px; position: absolute; right: 0; top: 0; width: 30px; }
+			.global-tags  .more:before { background-image: linear-gradient(90deg, rgba(0, 95, 60, 0), #333); background-size: 100% auto; content: ""; height: 100%; left: -20px; position: absolute; top: 0; width: 20px; }
+		</style>
+		<script src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/push.js"></script><script src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/hm.js"></script><script src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/jquery.min.js"></script>
+ 		 <script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/jquery-ui.js"></script>
+ 		  <script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/openbbs.js"></script>
+		<script type="text/javascript">
+			/*<![CDATA[*/
+				var messages = {
+					confirm: "请确认是否操作?",
+					yes: "是",
+					no: "否",
+					message: "提示:",
+					cancel: "取消",
+					close: "关闭",
+					ok: "Ok"
+				}
+			/*]]>*/
+	  </script> 
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?4b19e5cc155fe555484434d8338ee0af";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><style>.cke{visibility:hidden;}</style><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/config_mini.js"></script><script src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/logger.js"></script><link href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/bdsstyle.css" rel="stylesheet" type="text/css"><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/skin.js"></script><link rel="stylesheet" type="text/css" href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/editor.css"><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/zh-cn.js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/plugin.js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/plugin(1).js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/plugin(2).js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/plugin(3).js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/plugin(4).js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/zh-cn(1).js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/zh-cn(2).js"></script><script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/highlight.pack.js"></script></head>
+
+    <body><iframe frameborder="0" style="display: none;"></iframe><div id="bdshare" style="right: 0px; top: 256px; position: fixed; height: 330px; overflow: hidden;"><img src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/r0.gif" alt="" style="float:left;margin-top:58px;"><iframe id="bdsIfr" style="position:absolute;display:none;z-index:9999;" frameborder="0"></iframe><div id="bdshare_l" style="display: none; left: 24px;"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_mshare mshare">一键分享</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_bdysc bdysc">百度云收藏</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_renren rrw">人人网</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_bdxc bdxc">百度相册</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_douban db">豆瓣网</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_bdhome bdhome">百度新首页</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_sqq sqq">QQ好友</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_thx thx">和讯微博</a></li><li><a href="http://www.open-open.com/code/view/1434098768536#" class="bds_more">更多...</a></li></ul><p><a href="http://www.open-open.com/code/view/1434098768536#" class="goWebsite">百度分享</a></p></div></div></div>
+
+
+
+
+<header class="site-header">
+	<div class="header-top ">
+		<div class="header-top-inner">
+			<div class="" style="margin: 0 30px;">
+				<div class="row">
+					<div class="header-top-left col-lg-6 col-md-6 col-sm-6 col-xs-12 v-grid">
+						<div class="header-talet">
+							<a href="http://www.open-open.com/">首页</a> &nbsp;
+							<a class="active" href="http://www.open-open.com/code/">代码</a> &nbsp;
+							<a class="" href="http://www.open-open.com/doc/">文档</a> &nbsp;
+							<a class="" title="OPEN论坛频道" href="http://www.open-open.com/solution/">问答</a> &nbsp;
+							<a title="OPEN资讯" class="" href="http://www.open-open.com/news/">资讯</a> &nbsp;
+							<a title="OPEN经验库" class="" href="http://www.open-open.com/lib/">经验</a> &nbsp;
+							<a title="GitHub日报" class="" href="http://www.open-open.com/github/">GitHub日报</a>
+							&nbsp;
+						</div>
+					</div>
+					<div class="header-top-right col-lg-6 col-md-6 col-sm-6 col-xs-12 v-grid">
+						<div class="user-info pull-right" id="Personal">
+							
+								<a href="http://www.open-open.com/code/members/login" title="登录OPEN经验库" class="login">登录</a>&nbsp;&nbsp;
+								<a href="http://www.open-open.com/code/members/register" title="注册新的账号" class="register">注册</a>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar ">
+		<div class="container">
+			<div class="navbar-header" style="margin-right: 30px;">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span aria-hidden="true" class="glyphicon glyphicon-menu-hamburger"></span>
+					<span aria-hidden="true" class="glyphicon glyphicon-menu-up"></span>
+				</button>
+				<a class="top-logo" href="http://www.open-open.com/code"><span>www.open-open.com/code/</span></a>
+				<span style="font-size: 26px;color: #db6d4c">OPEN代码</span>
+				<span style="font-size: 12px;color: #b5b5b5"></span>
+			</div>
+
+			<div class="pull-right" style="padding: 20px;">
+				<a id="nav_ask" href="http://www.open-open.com/code/submit/add" class="btn btn-danger br40">分享代码得积分</a>
+			</div>
+			<div id="search">
+				<form method="post" action="http://www.open-open.com/code/search">
+
+					<div class="input-group">
+						<input type="text" placeholder="输入关键字搜索" class="form-control" value="" name="q" id="keywords">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                      </span>
+
+					</div>
+				</form>
+
+
+				<!-- /input-group -->
+
+			</div>
+
+		</div>
+	</nav>
+	<div class="global-tags">
+		<div class="container">
+			<ul class="nav__list">
+
+				<li class="nav__item"><i class="fa fa-tags"></i></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Android" rel="tag">Android</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/IOS" rel="tag">IOS</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/JavaScript" rel="tag">JavaScript</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/HTML5" rel="tag">HTML5</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/CSS" rel="tag">CSS</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/jQuery" rel="tag">jQuery</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Python" rel="tag">Python</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/PHP" rel="tag">PHP</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/NodeJS" rel="tag">NodeJS</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Java" rel="tag">Java</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Spring" rel="tag">Spring</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/MySQL" rel="tag">MySQL</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/MongoDB" rel="tag">MongoDB</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Redis" rel="tag">Redis</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/NOSQL" rel="tag">NOSQL</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/C++" rel="tag">C++</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/C#" rel="tag">C#</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/JSON" rel="tag">JSON</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Ruby" rel="tag">Ruby</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Linux" rel="tag">Linux</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Nginx" rel="tag">Nginx</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/code/tags/Docker" rel="tag">Docker</a></li>
+				<li class="more"><a href="http://www.open-open.com/code/tags/all"><i class="fa fa-ellipsis-h" style="font-size: 18px;"></i></a></li>
+
+			</ul>
+
+		</div>
+	</div>
+</header>
+
+
+    
+    
+<link href="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/idea.min.css" rel="stylesheet">
+<style>
+    .articleHead{background-color: #33ccff;color: #fff;padding: 40px 45px;}
+    .articleHead .bronze{font-size: 20px;}
+    .articleHead i{font-size: 30px;margin: 0 5px 0 20px;}
+    .articleHead a{color:#fff;font-size: 20px;}
+    #readercontainer{background: #fff;padding: 40px 80px;}
+    .post-update-info { padding-top: 25px; }
+    .mental{background-color: #3a3a3a;color: #fff;}
+
+    .comment-list{list-style: outside none none;}
+    .comment-list li {
+        border-bottom: 1px solid #f2f2f2;
+        margin-bottom: 24px;
+        padding-bottom: 30px;
+    }
+    .comment-list .comment-info {
+        line-height: 22px;
+    }
+
+    .comment-list .avatar {
+        position: relative;
+        top: 6px;
+    }
+
+    .post-container .post-comment .avatar img {
+        border-radius: 50%;
+        margin: -2px 5px 0 0;
+    }
+
+    .comment-list .comment-cont, .comment-list .tools {
+        margin-left: 52px;
+    }
+    .comment-list .comment-cont {
+        font-size: 1.6rem;
+        line-height: 24px;
+        margin-bottom: 17px;
+        margin-top: -4px;
+    }
+
+</style>
+<div class="container" style="margin-top: 30px;">
+    <div class="row" style="display: flex;">
+
+        <div class="col-md-9 articleHead">
+            <h1>CryptoJS AES加密、解密练习demo</h1>
+            <div class="post-update-info post-update-info-user">
+
+
+               <a href="http://www.open-open.com/code/user/profile/484630"><img class="gravatar" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/avatar.php" alt="gf67的头像" height="40" width="40">&nbsp;gf67</a>
+
+                <i aria-hidden="true" class="fa fa-code" title="代码数"></i><span class="score" title="代码数"><span class="bronze">12</span></span>
+
+                <i aria-hidden="true" class="fa fa-calendar" title="分享时间"></i>
+                <strong>2015-06-12 16:46</strong>
+                <i aria-hidden="true" class="fa fa-thumbs-o-up" title="赞"></i>
+                <span id="post-15886-score" class="post-score" title="current number of votes">
+                    1
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-3 mental">
+            <h3 class="title"><i aria-hidden="true" class="fa fa-info"></i>&nbsp;基本信息</h3>
+            <p class="tags">
+
+                
+                    <a rel="tag" class="tag-link-osqa" title="查看打上 &#39;JavaScript&#39; 标签的相关代码" href="http://www.open-open.com/code/tags/JavaScript">JavaScript</a> <span class="tag-number">× 1</span> &nbsp;&nbsp;
+                
+            </p>
+            <p>
+                浏览数: <strong>3414</strong>
+            </p>
+            <p>
+                分享时间: <strong title="2015-06-12">1 year ago</strong>
+            </p>
+
+            <div class="classon">
+                <p><a href="http://www.open-open.com/code?sort=active&amp;lang=3&amp;catalog=0" class="on">语言：JavaScript</a></p>
+                <p><a href="http://www.open-open.com/code?sort=active&amp;lang=0&amp;catalog=15" class="on">分类：安全与加密</a></p>
+            </div>
+        </div>
+        </div>
+
+</div>
+
+<div class="container">
+    <div class="row" style="display: flex;">
+
+        <div id="readercontainer" class="col-md-9">
+            <div class="post-options clearfix">
+
+
+                <a id="post-15886-upvote" title="我喜欢这个代码，投它一票吧" class="ajax-command post-vote up  " href="http://www.open-open.com/code/view/voteup/15886?t=q" rel="nofollow"><i aria-hidden="true" class="fa fa-thumbs-up"></i> </a>
+
+                <a id="post-15886-downvote" title="我不喜欢这个代码，踩一脚" class="ajax-command post-vote down " href="http://www.open-open.com/code/view/votedown/15886?t=q" rel="nofollow"><i aria-hidden="true" class="fa fa-thumbs-down"></i> </a>
+
+                <a id="favorite-mark" title="收藏这个代码(再点一次取消)" class="ajax-command favorite-mark " href="http://www.open-open.com/code/view/mark_favorite/15886" rel="nofollow"> </a>
+                <span id="favorite-count" class="favorite-count">
+                    
+                        1
+                    
+                </span>
+
+            </div>
+
+
+            <div id="askform">
+                <div id="item-right">
+                    <div class="question-body">
+
+                        <pre class="brush:javascript; toolbar: true; auto-links: false;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;aes demo&lt;/title&gt;
+    &lt;meta charset="utf-8"/&gt;
+    &lt;style&gt;
+        *{margin:0;padding:0}
+        .demo-wrap{width: 400px;height: 50px;margin: 50px auto auto auto}
+    &lt;/style&gt;
+    &lt;script src="./rollups/aes.js"&gt;&lt;/script&gt;
+&lt;!--    &lt;script src="./components/pad-zeropadding.js"&gt;&lt;/script&gt;--&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="demo-wrap"&gt;
+    &lt;input type="text" id="data-ipt"/&gt;
+    &lt;button onclick="getAES();"&gt;AES加密&lt;/button&gt;
+    &lt;button onclick="getDAes();"&gt;AES解密&lt;/button&gt;
+    &lt;br/&gt;
+    加密后的数据:
+    &lt;p id = "encrypted"&gt;&lt;/p&gt;
+    解密后的数据:
+    &lt;p id="decrypted"&gt;&lt;/p&gt;
+&lt;/div&gt;
+    &lt;script&gt;
+        function getAesString(data,key,iv){//加密
+            var key  = CryptoJS.enc.Hex.parse(key);
+            var iv   = CryptoJS.enc.Latin1.parse(iv);
+            var encrypted = CryptoJS.AES.encrypt(data,key,
+                    {
+                        iv:iv,
+                        mode:CryptoJS.mode.CBC,
+                        padding:CryptoJS.pad.Pkcs7
+                    });
+            return encrypted;
+        }
+        function getDAesString(encrypted,key,iv){//解密
+            var key  = CryptoJS.enc.Hex.parse(key);
+            var iv   = CryptoJS.enc.Latin1.parse(iv);
+            var decrypted = CryptoJS.AES.decrypt(encrypted,key,
+                    {
+                        iv:iv,
+                        mode:CryptoJS.mode.CBC,
+                        padding:CryptoJS.pad.Pkcs7
+                    });
+            return decrypted.toString(CryptoJS.enc.Utf8);
+        }
+        function getAES(){ //加密
+            var data = document.getElementById("data-ipt").value;//明文
+            var key  = '1234567812345678';  //密钥
+            var iv   = 'Pkcs7';
+            var encrypted = getAesString(data,key,iv); //密文
+            document.getElementById("encrypted").innerHTML = encrypted;
+        }
+ 
+        function getDAes(){//解密
+            var encrypted = document.getElementById("encrypted").innerHTML; //密文
+            var key  = '1234567812345678';
+            var iv   = 'Pkcs7';
+            var decryptedStr = getDAesString(encrypted,key,iv);
+            document.getElementById("decrypted").innerHTML = decryptedStr;
+        }
+        &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre> 
+<br>
+
+                    </div>
+                    <div id="question-tags" class="tags">
+                        
+                            <a href="http://www.open-open.com/code/tags/JavaScript" class="post-tag tag-link-installation" title="查看 &#39;JavaScript&#39; 相关问题" rel="tag">JavaScript</a>
+                        
+                    </div>
+                    <div id="question-controls" class="post-controls">
+                        
+                    </div>
+                    <div class="post-update-info-container">
+
+
+                        
+
+                    </div>
+
+
+                    
+                    <div class="comments-container" id="comments-container-15886">
+                        
+                        
+
+                    </div>
+
+
+
+                    <div id="comment-tools-15886" class="comment-tools">
+                        
+                        
+
+                    </div>
+                    
+
+                </div>
+
+                
+                
+                    <form id="fmanswer" action="http://www.open-open.com/code/view/answer#saveAnaswer" method="post">
+                        <input type="hidden" name="qid" value="1434098768536">
+                        <div style="clear:both">
+                        </div>
+
+
+                        <div style="padding:10px 0 0 0;">
+                            <div class="headNormal">
+                                
+                                
+                                    还没有人评论，赶快来抢沙发吧！
+                                
+
+                            </div>
+
+                        </div>
+
+
+                        <p>
+                            
+                        <a name="saveAnaswer"></a>
+                        </p>
+                        <div id="description" class="">
+                            <div class="resizable-textarea"><span><textarea class="processed" rows="10" cols="40" name="content" id="editor" style="visibility: hidden; display: none;"></textarea><div id="cke_editor" class="cke_1 cke cke_reset cke_chrome cke_editor_editor cke_ltr cke_browser_webkit" dir="ltr" lang="zh-cn" role="application" aria-labelledby="cke_editor_arialbl"><span id="cke_editor_arialbl" class="cke_voice_label">所见即所得编辑器, editor</span><div class="cke_inner cke_reset" role="presentation"><span id="cke_1_top" class="cke_top cke_reset_all" role="presentation" style="height: auto; -webkit-user-select: none;"><span id="cke_10" class="cke_voice_label">工具栏</span><span id="cke_1_toolbox" class="cke_toolbox" role="group" aria-labelledby="cke_10" onmousedown="return false;"><span id="cke_11" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_12" class="cke_button cke_button__bold cke_button_off" href="javascript:void(&#39;加粗&#39;)" title="加粗" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_12_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(2,event);" onfocus="return CKEDITOR.tools.callFunction(3,event);" onclick="CKEDITOR.tools.callFunction(4,this);return false;"><span class="cke_button_icon cke_button__bold_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -24px;background-size:auto;">&nbsp;</span><span id="cke_12_label" class="cke_button_label cke_button__bold_label" aria-hidden="false">加粗</span></a><a id="cke_13" class="cke_button cke_button__italic cke_button_off" href="javascript:void(&#39;倾斜&#39;)" title="倾斜" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_13_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(5,event);" onfocus="return CKEDITOR.tools.callFunction(6,event);" onclick="CKEDITOR.tools.callFunction(7,this);return false;"><span class="cke_button_icon cke_button__italic_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -48px;background-size:auto;">&nbsp;</span><span id="cke_13_label" class="cke_button_label cke_button__italic_label" aria-hidden="false">倾斜</span></a><a id="cke_14" class="cke_button cke_button__underline cke_button_off" href="javascript:void(&#39;下划线&#39;)" title="下划线" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_14_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(8,event);" onfocus="return CKEDITOR.tools.callFunction(9,event);" onclick="CKEDITOR.tools.callFunction(10,this);return false;"><span class="cke_button_icon cke_button__underline_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -144px;background-size:auto;">&nbsp;</span><span id="cke_14_label" class="cke_button_label cke_button__underline_label" aria-hidden="false">下划线</span></a><a id="cke_15" class="cke_button cke_button__strike cke_button_off" href="javascript:void(&#39;删除线&#39;)" title="删除线" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_15_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(11,event);" onfocus="return CKEDITOR.tools.callFunction(12,event);" onclick="CKEDITOR.tools.callFunction(13,this);return false;"><span class="cke_button_icon cke_button__strike_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -72px;background-size:auto;">&nbsp;</span><span id="cke_15_label" class="cke_button_label cke_button__strike_label" aria-hidden="false">删除线</span></a><a id="cke_16" class="cke_button cke_button__textcolor cke_button_off " href="javascript:void(&#39;文本颜色&#39;)" title="文本颜色" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_16_label" aria-haspopup="true" onkeydown="return CKEDITOR.tools.callFunction(14,event);" onfocus="return CKEDITOR.tools.callFunction(15,event);" onclick="CKEDITOR.tools.callFunction(16,this);return false;"><span class="cke_button_icon cke_button__textcolor_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -408px;background-size:auto;">&nbsp;</span><span id="cke_16_label" class="cke_button_label cke_button__textcolor_label" aria-hidden="false">文本颜色</span><span class="cke_button_arrow"></span></a><a id="cke_17" class="cke_button cke_button__bgcolor cke_button_off " href="javascript:void(&#39;背景颜色&#39;)" title="背景颜色" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_17_label" aria-haspopup="true" onkeydown="return CKEDITOR.tools.callFunction(17,event);" onfocus="return CKEDITOR.tools.callFunction(18,event);" onclick="CKEDITOR.tools.callFunction(19,this);return false;"><span class="cke_button_icon cke_button__bgcolor_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -384px;background-size:auto;">&nbsp;</span><span id="cke_17_label" class="cke_button_label cke_button__bgcolor_label" aria-hidden="false">背景颜色</span><span class="cke_button_arrow"></span></a><a id="cke_18" class="cke_button cke_button__numberedlist cke_button_off" href="javascript:void(&#39;编号列表&#39;)" title="编号列表" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_18_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(20,event);" onfocus="return CKEDITOR.tools.callFunction(21,event);" onclick="CKEDITOR.tools.callFunction(22,this);return false;"><span class="cke_button_icon cke_button__numberedlist_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -1368px;background-size:auto;">&nbsp;</span><span id="cke_18_label" class="cke_button_label cke_button__numberedlist_label" aria-hidden="false">编号列表</span></a><a id="cke_19" class="cke_button cke_button__bulletedlist cke_button_off" href="javascript:void(&#39;项目列表&#39;)" title="项目列表" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_19_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(23,event);" onfocus="return CKEDITOR.tools.callFunction(24,event);" onclick="CKEDITOR.tools.callFunction(25,this);return false;"><span class="cke_button_icon cke_button__bulletedlist_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -1320px;background-size:auto;">&nbsp;</span><span id="cke_19_label" class="cke_button_label cke_button__bulletedlist_label" aria-hidden="false">项目列表</span></a><a id="cke_20" class="cke_button cke_button__blockquote cke_button_off" href="javascript:void(&#39;块引用&#39;)" title="块引用" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_20_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(26,event);" onfocus="return CKEDITOR.tools.callFunction(27,event);" onclick="CKEDITOR.tools.callFunction(28,this);return false;"><span class="cke_button_icon cke_button__blockquote_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -216px;background-size:auto;">&nbsp;</span><span id="cke_20_label" class="cke_button_label cke_button__blockquote_label" aria-hidden="false">块引用</span></a><a id="cke_21" class="cke_button cke_button__link cke_button_off" href="javascript:void(&#39;插入/编辑超链接&#39;)" title="插入/编辑超链接" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_21_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(29,event);" onfocus="return CKEDITOR.tools.callFunction(30,event);" onclick="CKEDITOR.tools.callFunction(31,this);return false;"><span class="cke_button_icon cke_button__link_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -1248px;background-size:auto;">&nbsp;</span><span id="cke_21_label" class="cke_button_label cke_button__link_label" aria-hidden="false">插入/编辑超链接</span></a><a id="cke_22" class="cke_button cke_button__unlink cke_button_disabled " href="javascript:void(&#39;取消超链接&#39;)" title="取消超链接" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_22_label" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(32,event);" onfocus="return CKEDITOR.tools.callFunction(33,event);" onclick="CKEDITOR.tools.callFunction(34,this);return false;"><span class="cke_button_icon cke_button__unlink_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -1272px;background-size:auto;">&nbsp;</span><span id="cke_22_label" class="cke_button_label cke_button__unlink_label" aria-hidden="false">取消超链接</span></a><a id="cke_23" class="cke_button cke_button__image cke_button_off" href="javascript:void(&#39;图像&#39;)" title="图像" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_23_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(35,event);" onfocus="return CKEDITOR.tools.callFunction(36,event);" onclick="CKEDITOR.tools.callFunction(37,this);return false;"><span class="cke_button_icon cke_button__image_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/icons.png?t=G14E&#39;);background-position:0 -936px;background-size:auto;">&nbsp;</span><span id="cke_23_label" class="cke_button_label cke_button__image_label" aria-hidden="false">图像</span></a><a id="cke_24" class="cke_button cke_button__codesnippet cke_button_off" href="javascript:void(&#39;插入代码段&#39;)" title="插入代码段" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_24_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(38,event);" onfocus="return CKEDITOR.tools.callFunction(39,event);" onclick="CKEDITOR.tools.callFunction(40,this);return false;"><span class="cke_button_icon cke_button__codesnippet_icon" style="background-image:url(&#39;http://www.open-open.com/lib/ckeditor/plugins/codesnippet/icons/codesnippet.png?t=G14E&#39;);background-position:0 0px;background-size:16px;">&nbsp;</span><span id="cke_24_label" class="cke_button_label cke_button__codesnippet_label" aria-hidden="false">插入代码段</span></a></span><span class="cke_toolbar_end"></span></span></span></span><div id="cke_1_contents" class="cke_contents cke_reset" role="presentation" style="height: 200px;"><span id="cke_29" class="cke_voice_label">按 ALT+0 获得帮助</span><iframe src="" frameborder="0" class="cke_wysiwyg_frame cke_reset" style="width: 100%; height: 100%;" title="所见即所得编辑器, editor" aria-describedby="cke_29" tabindex="4" allowtransparency="true"></iframe></div><span id="cke_1_bottom" class="cke_bottom cke_reset_all" role="presentation" style="-webkit-user-select: none;"><span id="cke_1_resizer" class="cke_resizer cke_resizer_vertical cke_resizer_ltr" title="拖拽以改变大小" onmousedown="CKEDITOR.tools.callFunction(0, event)">◢</span><span id="cke_1_path_label" class="cke_voice_label">元素路径</span><span id="cke_1_path" class="cke_path" role="group" aria-labelledby="cke_1_path_label"><span class="cke_path_empty">&nbsp;</span></span></span></div></div><div style="margin-right: -4px;" class="grippie"></div></span></div>
+                        </div>
+
+                        <div style="margin-top: 10px">
+                            
+                            
+                                &nbsp;&nbsp;<label style="font-size: 14px;font-weight: bold">您还没有登录，点击这里<a href="http://www.open-open.com/code/members/login"><strong>登录</strong></a>或<a href="http://www.open-open.com/code/members/register"><strong>注册</strong></a>之后才能回复！</label>
+                            
+                        </div>
+                    </form>
+                
+
+                
+            </div>
+        </div>
+        <div class="col-md-3" style="background: #e3e6e8 none repeat scroll 0 0;">
+
+            <div style="margin-top: 20px;" class=" side-box">
+                <div class="title"><h3>相关代码</h3></div>
+                <div class="body">
+                    <ul>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1441452842675">Javascript下aes加解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1420689639562">C#, Java, PHP, Python 和 Javascript 的 AES 加密解密实现</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1420689639562">C#, Java, PHP, Python 和 Javascript 的 AES 加密解密实现</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1453190109776">AES C#, Java, PHP, Python和Javascript几种语言的AES加密解密实现</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1441447682909">c#里面的AES加密解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1441452946081">python的AES加密解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1442757427067">AES加密解密C#代码</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1427459681527"> iOS的AES加解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1441452707425">Java的AES加密解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/code/view/1434795807676">python AES算法模块进行加密解密的代码片段</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+
+            <div style="margin-top: 20px;" class=" side-box">
+                <div class="title"><h3>相关文档</h3></div>
+                <div class="body">
+                    <ul style="list-style: none;">
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/deb29da3615748d58d50b7a0da40f81d" target="_blank">简单的加密解密例子.docx</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/ac21446d86ab488c8d180e5744d6dab6" target="_blank">AES 加密算法原理.docx</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/cf95a4b0b47c434bb411ef797c5b2f6b" target="_blank">DES加密解密的C++源程序.docx</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/0f7ebfd8c2b74b2db40ed77a5c3a4ec6" target="_blank">AES加解密实现Java.doc</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/4e70d6cc8936482881452c151018c2fb" target="_blank">Des加密算法与解密(带流程图).doc</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/a586a4f3bbf84bb99b6b7500834b0c8c" target="_blank">Java 加密解密方法大全.pdf</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/f85cafac84774dd0a6761d552e1d0954" target="_blank">java加密算法（二）——对称加密算法DES&amp;AES.doc</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/70505b17414c452180bdb37f9e631920" target="_blank">Java加密解密方法大全.pdf</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/65f02e948f574709a37cc9305ea3158f" target="_blank">java 加密解密简单实现.doc</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/doc/view/ca67c0013d56466b97570425ff3d5c28" target="_blank">java 加密解密简单实现.doc</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+
+            </div>
+
+            <div style="margin-top: 20px;" class=" side-box">
+                <div class="title"><h3>相关经验</h3></div>
+                <div class="body">
+                    <ul>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1426646330789.html" target="_blank">golang 与 js 的des加密 </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1416033132789.html" target="_blank">Android实现AES加密/解密代码</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1459335495420.html" target="_blank">iOS开发之AES+Base64数据混合加密与解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1343610719899.html" target="_blank"> Java加解密艺术之AES对称加密算法 </a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1419860519281.html" target="_blank">JS七种JAVASCRIPT加密/解密方法</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1338639339297.html" target="_blank">Java AES文件加解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1385946495658.html" target="_blank">使用OpenSSL库的AES加解密</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1341644272307.html" target="_blank">Java文本加密解密工具 ImmediateCrypt</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1422848879561.html" target="_blank">加密/解密库libsodium的一个JavaScript实现：libsodium.js</a>
+                            </li>
+                        
+                            <li>
+                                <a href="http://www.open-open.com/lib/view/open1406210667289.html" target="_blank">用openssl对文件加密及解密</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/ckeditor.js" charset="UTF-8"></script>
+
+
+
+<script src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/highlight.min.js"></script>
+        <script type="text/javascript">
+
+        $(function(){
+            hljs.initHighlightingOnLoad();
+            $("#nav_questions").attr('className',"on");
+            var answer_sort_tab = "";
+
+            if (answer_sort_tab) {
+                $("#" + answer_sort_tab).attr('className',"on");
+            }
+            
+        });
+
+        function submitClicked(e, f) {
+            if(!(browserTester('chrome') || browserTester('safari'))) {
+                $("input.submit")[0].disabled=true;
+            }
+            if (f) {
+                f.submit();
+            }
+        }
+
+        </script>
+        <noscript>
+            &lt;style&gt;
+                .comment.not_top_scorer {
+                    display: block;
+                }
+                .comment-form-container {
+                    display: block;
+                }
+                .div.comment-tools {
+                    display: none;
+                }
+            &lt;/style&gt;
+        </noscript>
+         
+	<script type="text/javascript">
+        var ImageUploadUrl = "/code/upload_json.jsp?dir=image";
+        var editor = CKEDITOR.replace( 'editor', { customConfig: 'config_mini.js' } );
+		function save(){
+			$("#savebt").attr("disabled","true");
+			$("#savebt").val("保存中...");
+			$('#fmanswer').submit();
+		}
+
+
+	</script>
+ 	
+
+
+
+
+<div id="ground" style="width: 100%;margin-bottom: 0px">         
+    	<div class="footerLinks">
+         	<a href="http://www.open-open.com/home/1">联系我们</a> | <a href="http://www.open-open.com/">Java开源大全</a> | <a href="http://www.open-open.com/doc">OPEN文档</a> | <a href="http://www.open-open.com/home">OPEN家园</a> | <a href="http://www.open-open.com/news">OPEN资讯 | </a><a href="http://www.open-open.com/lib">OPEN经验库</a> 
+	  		<p>
+	     		<a href="http://www.open-open.com/" target="_blank" title="Java开源大全">
+	       			powered by OPEN-OPEN.COM
+	     		</a>
+	  		</p>
+  		</div>
+ </div>     
+        
+ 
+ 
+
+<center><div id="msg"></div></center>
+
+
+<script type="text/javascript" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/scrolltopcontrol.js"></script>
+<script type="text/javascript">
+  	scrolltotop.offset(150,165);
+	scrolltotop.init();
+  </script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+ <!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=0&amp;pos=right&amp;uid=6734290" src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/bds_s_v2.js"></script>
+
+<script type="text/javascript">
+var bds_config={"bdTop":256};
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+</script>
+<!-- Baidu Button END -->           
+
+
+<div id="topcontrol" title="回到顶部" style="position: fixed; bottom: 165px; right: 150px; cursor: pointer;"><img src="./CryptoJS AES加密、解密练习demo - OPEN代码分享_files/gotop.gif" style="width:35px; height:35px;"></div></body></html>

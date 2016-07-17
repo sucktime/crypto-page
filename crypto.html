@@ -1,0 +1,38 @@
+﻿<html>
+<head>
+<script src="jquery-3.0.0.min.js"></script>
+<script src="crypto-js-3.1.6/crypto-js.js"></script>
+</head>
+<body>
+<input id="in" type="text" value="null"/>
+<input id="out" type="text" value="null"/>
+<button id="do_enc">加密</button>
+<button id="do_dec">解密</button> 
+<script type="text/javascript">
+//functions-rename：
+var utf8Str2wordArr = CryptoJS.enc.Utf8.parse
+var sha256 = CryptoJS.SHA256
+var encrypt = CryptoJS.AES.encrypt
+var decrypt = CryptoJS.AES.decrypt
+
+var settings = {iv:0, mode:CryptoJS.mode.CBC, padding:CryptoJS.pad.Pkcs7}
+var input = $("#in").val()
+
+var passphrase_warr = utf8Str2wordArr(input.val())
+var hash_warr = sha256(passphrase_warr)
+var hash_hex = hash_warr.toString()
+key_hex = hash_hex.substr(0,32)
+iv_hex = hash_hex.substr(32,32)
+//将十六进制字符串表示的key和iv转换成wordArray对象
+key_warr = utf8Str2wordArr(key_hex)
+iv_warr = utf8Str2wordArr(iv_hex)
+settings.iv = iv_warr
+//加密得到cipher对象，其中有wordArray对象cipherText
+cipher_c = encrypt(input,key_warr,settings)
+
+plain_warr = decrypt(cipher_c,key_warr,settings)
+
+
+</script>
+</body>
+</html>
